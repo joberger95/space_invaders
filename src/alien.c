@@ -7,16 +7,12 @@
 #include "alien.h"
 #include "serial.h"
 #include "vt100.h"
+#include "missile_move.h"
 
-typedef struct
-{
-	char alien_army[NOMBREALIENX][NOMBREALIENY];
-	char x;
-	char y;
-} t_alien;
 
-static t_alien alien;
-static t_alien *ptr = &alien;
+
+t_alien alien;
+t_alien *ptr = &alien;
 
 void alien_init(void)
 {
@@ -44,6 +40,7 @@ void alien_movement(void)
 			serial_putchar(' ');
 		}
 	}
+	ptr->x = m;
 	for (int numero_case = 0; numero_case < NBCASES; numero_case++)
 	{
 		for (int j = 0; j < NOMBREALIENY; j++)
@@ -52,5 +49,6 @@ void alien_movement(void)
 			serial_putchar(ptr->alien_army[numero_case][j]);
 		}
 	}
+	missile_move(ptr);
 }
 

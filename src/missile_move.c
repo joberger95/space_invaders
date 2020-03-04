@@ -7,10 +7,9 @@
 #include "missile_move.h"
 #include "vt100.h"
 #include "serial.h"
+#include "alien.h"
 
-void missile_move(char carac_lu, char compteur, char x, char y)
+void missile_move(t_alien *ptr)
 {
-
-
+	ptr->x = 0;
 }
-

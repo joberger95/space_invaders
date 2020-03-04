@@ -12,6 +12,13 @@
 #define NOMBREALIENX (7)
 #define NOMBREALIENY (5)
 
+typedef struct
+{
+	char alien_army[NOMBREALIENX][NOMBREALIENY];
+	char x;
+	char y;
+} t_alien;
+
 void alien_init(void);
 void alien_movement(void);
 
