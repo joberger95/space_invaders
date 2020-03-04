@@ -1,0 +1,2 @@
+alien.c:21:6:alien_init	16	static
+alien.c:35:6:alien_movement	24	static

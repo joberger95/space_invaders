@@ -1,0 +1,2 @@
+ship.c:12:6:ship_friend	16	static
+ship.c:21:6:ship_ennemies	16	static
