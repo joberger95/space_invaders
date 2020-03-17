@@ -9,6 +9,8 @@
 #define MISSILE_MOVE_H_
 #include "alien.h"
 
-void missile_move(t_alien *ptr);
+#define DEAD (' ');
+
+void missile_shoot(unsigned char x, unsigned char y);
 
 #endif /* MISSILE_MOVE_H_ */

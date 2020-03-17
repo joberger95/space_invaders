@@ -11,13 +11,16 @@
 #define NBCASES (6)
 #define NOMBREALIENX (7)
 #define NOMBREALIENY (5)
+#define ALIENSKIN ('O')
 
 typedef struct
 {
-	char alien_army[NOMBREALIENX][NOMBREALIENY];
-	char x;
-	char y;
+	unsigned char alien_army[NOMBREALIENX][NOMBREALIENY];
+	unsigned char x;
+	unsigned char y;
 } t_alien;
+
+extern t_alien *ptr_alien;
 
 void alien_init(void);
 void alien_movement(void);

@@ -9,10 +9,8 @@
 #include "vt100.h"
 #include "missile_move.h"
 
-
-
 t_alien alien;
-t_alien *ptr = &alien;
+t_alien *ptr_alien = &alien;
 
 void alien_init(void)
 {
@@ -20,18 +18,20 @@ void alien_init(void)
 	{
 		for (int j = 0; j < NOMBREALIENY; j++)
 		{
-			ptr->alien_army[1 + i][1 + j] = 'O';
+			ptr_alien->alien_army[1 + i][1 + j] = ALIENSKIN;
 			vt100_move(i, j);
-			serial_putchar(ptr->alien_army[i][j]);
+			serial_putchar(ptr_alien->alien_army[i][j]);
 		}
 	}
-	ptr->x = 0;
+	ptr_alien->x = 0;
 }
 
 void alien_movement(void)
 {
-	int m = ptr->x;
-	while (m < (ptr->x + NBCASES))
+	int m = ptr_alien->x;
+	if (m == 80 - NOMBREALIENX)
+		ptr_alien->x = 0;
+	while (m < (ptr_alien->x + NBCASES))
 	{
 		m++;
 		for (int j = 0; j < NOMBREALIENY; j++)
@@ -40,15 +40,14 @@ void alien_movement(void)
 			serial_putchar(' ');
 		}
 	}
-	ptr->x = m;
+	ptr_alien->x = m;
 	for (int numero_case = 0; numero_case < NBCASES; numero_case++)
 	{
 		for (int j = 0; j < NOMBREALIENY; j++)
 		{
-			vt100_move(numero_case + ptr->x, j);
-			serial_putchar(ptr->alien_army[numero_case][j]);
+			vt100_move(numero_case + ptr_alien->x, j);
+			serial_putchar(ptr_alien->alien_army[numero_case][j]);
 		}
 	}
-	missile_move(ptr);
 }
 

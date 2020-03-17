@@ -1,3 +1,4 @@
+b
 /*
  ******************************************************************************
  File:     main.c
@@ -84,6 +85,11 @@ int main(void)
 	{
 		i++;
 		deplacement();
+		if (answer_shoot == 1)
+		{
+			ptr_status->position_y -= 1;
+			missile_shoot(ptr_status->position_x, ptr_status->position_y);
+		}
 		if (i == 100)
 		{
 			alien_movement();

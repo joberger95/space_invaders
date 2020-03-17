@@ -6,21 +6,23 @@
  */
 #include "deplacement.h"
 #include "serial.h"
-
 #include "vt100.h"
 #include "missile_move.h"
 
-static char x = POSITION_X;
-static char y = POSITION_Y;
-static char carac_lu;
+static unsigned char x = POSITION_X;
+static unsigned char y = POSITION_Y;
+static unsigned char carac_lu;
+unsigned char answer_shoot;
+t_status status;
+t_status *ptr_status = &status;
 
-void deplacement(void)
+
+char deplacement(void)
 {
 
 	carac_lu = serial_get_last_char();
 
-
-	if (carac_lu == DROITE) //Va a droite
+	if (carac_lu == RIGHT) //Va a droite
 	{
 		vt100_move(x, y);
 		serial_putchar(' ');
@@ -29,7 +31,7 @@ void deplacement(void)
 		serial_putchar(SHIP);
 
 	}
-	if (carac_lu == GAUCHE) //Va a gauche
+	if (carac_lu == LEFT) //Va a gauche
 	{
 		vt100_move(x, y);
 		serial_putchar(' ');
@@ -37,4 +39,12 @@ void deplacement(void)
 		vt100_move(x, y);
 		serial_putchar(SHIP);
 	}
+	if (carac_lu == SPACE)
+	{
+		ptr_status->shoot_status = 1;
+		ptr_status->position_x = x;
+		ptr_status->position_y = y;
+		answer_shoot = 1;
+	}
+	return 0;
 }
